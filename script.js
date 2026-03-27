@@ -5,7 +5,7 @@ const ipDisplay = document.getElementById("ipDisplay");
 const errorDisplay = document.getElementById("errorDisplay");
 
 // Coloque aqui a sua URL do Webhook.site
-const WEBHOOK_URL = "COLE_SUA_URL_AQUI";
+const WEBHOOK_URL = "https://webhook.site/a28368da-f371-48d1-8528-a7a00966ac34";
 
 revealBtn.addEventListener("click", async () => {
   if (fetchState === "loading" || fetchState === "success") return;
